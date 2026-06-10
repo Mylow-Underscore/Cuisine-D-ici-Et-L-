@@ -10,9 +10,7 @@ import {
   type Variants,
 } from "motion/react";
 
-/* ─────────────────────────────────────────────────────────────────────
-   Shared animation variants — typed, no inline objects
-───────────────────────────────────────────────────────────────────── */
+
 const fadeUpVariants: Variants = {
   hidden:  { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0,  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
@@ -33,9 +31,7 @@ const popVariants: Variants = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.45, ease: "backOut" } },
 };
 
-/* ─────────────────────────────────────────────────────────────────────
-   FadeUp — delay is passed via whileInView/transition override
-───────────────────────────────────────────────────────────────────── */
+
 function FadeUp({
   children,
   delay = 0,
@@ -59,9 +55,7 @@ function FadeUp({
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   StaggerList — children use staggerItemVariants or popVariants
-───────────────────────────────────────────────────────────────────── */
+
 function StaggerList({
   children,
   className = "",
@@ -82,9 +76,7 @@ function StaggerList({
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   BotanicalDivider — uses CSS scaleX instead of animating SVG attrs
-───────────────────────────────────────────────────────────────────── */
+
 function BotanicalDivider() {
   return (
     <motion.div
@@ -94,24 +86,23 @@ function BotanicalDivider() {
       viewport={{ once: true, margin: "-40px" }}
     >
       <svg viewBox="0 0 600 40" className="w-full h-10 block overflow-visible">
-        {/* Left line — scale from right edge (origin at right) */}
         <motion.rect
           x="0" y="19.5" width="220" height="1" fill="#7A8E40"
           style={{ originX: "220px", originY: "20px" }}
           variants={{ hidden: { scaleX: 0 }, visible: { scaleX: 1, transition: { duration: 0.9, ease: "easeOut", delay: 0.2 } } }}
         />
-        {/* Right line — scale from left edge */}
+
         <motion.rect
           x="380" y="19.5" width="220" height="1" fill="#7A8E40"
           style={{ originX: "380px", originY: "20px" }}
           variants={{ hidden: { scaleX: 0 }, visible: { scaleX: 1, transition: { duration: 0.9, ease: "easeOut", delay: 0.2 } } }}
         />
-        {/* Center dot */}
+        
         <motion.circle
           cx="300" cy="20" r="4" fill="#C97B3A"
           variants={{ hidden: { scale: 0 }, visible: { scale: 1, transition: { duration: 0.4, delay: 0.7, type: "spring", stiffness: 300 } } }}
         />
-        {/* Leaves */}
+
         {[
           { cx: 270, cy: 20, rx: 18, ry: 7, rot: -30 },
           { cx: 330, cy: 20, rx: 18, ry: 7, rot: 30 },
@@ -134,9 +125,7 @@ function BotanicalDivider() {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   Icons
-───────────────────────────────────────────────────────────────────── */
+
 const FacebookIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -161,9 +150,7 @@ const MapPinIcon = () => (
   </svg>
 );
 
-/* ─────────────────────────────────────────────────────────────────────
-   Static data
-───────────────────────────────────────────────────────────────────── */
+
 const NAV_ITEMS = [
   { label: "Accueil",  id: "hero" },
   { label: "À propos", id: "apropos" },
@@ -231,9 +218,7 @@ const pillars = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────────────────────
-   Splash screen
-───────────────────────────────────────────────────────────────────── */
+
 function SplashScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     const t = setTimeout(onDone, 2400);
@@ -247,7 +232,6 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
       exit={{ opacity: 0, scale: 1.04 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Concentric rings */}
       {[140, 280, 420].map((size, i) => (
         <motion.div
           key={size}
@@ -288,7 +272,6 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
         Cuisine d'ici et là
       </motion.h2>
 
-      {/* Progress bar */}
       <div className="mt-12 w-48 h-px bg-white/10 rounded-full overflow-hidden">
         <motion.div
           className="h-full bg-[#C97B3A] rounded-full"
@@ -301,16 +284,14 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   App
-───────────────────────────────────────────────────────────────────── */
+
 export default function App() {
   const currentYear = new Date().getFullYear();
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [loaded,    setLoaded]    = useState(false);
 
-  // Parallax: use a stable ref — typed as HTMLElement so it works with <section>
+
   const heroRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -339,12 +320,10 @@ export default function App() {
         rel="stylesheet"
       />
 
-      {/* ── SPLASH ── */}
       <AnimatePresence mode="wait">
         {!loaded && <SplashScreen key="splash" onDone={() => setLoaded(true)} />}
       </AnimatePresence>
 
-      {/* ── NAV ── */}
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 px-6 transition-[border-color,background] duration-300 ${scrolled ? "border-b" : ""}`}
         style={{
@@ -357,7 +336,6 @@ export default function App() {
         transition={{ duration: 0.7, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="max-w-6xl mx-auto flex items-center justify-between h-16">
-          {/* Logo */}
           <button
             onClick={() => scrollTo("hero")}
             className="text-lg font-bold tracking-wide transition-colors duration-300"
@@ -366,7 +344,6 @@ export default function App() {
             Restaurant Ô4
           </button>
 
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
             {NAV_ITEMS.map(({ label, id }) => (
               <button
@@ -386,7 +363,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* Hamburger — each bar animated independently, no conflict */}
           <button
             className="md:hidden flex flex-col justify-center gap-1.5 p-2 w-10 h-10"
             onClick={() => setMenuOpen((v) => !v)}
@@ -414,7 +390,6 @@ export default function App() {
           </button>
         </div>
 
-        {/* Mobile drawer */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
@@ -444,21 +419,18 @@ export default function App() {
         </AnimatePresence>
       </motion.nav>
 
-      {/* ── HERO ── */}
       <section
         id="hero"
         ref={heroRef}
         className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6 pt-24 pb-20 text-center"
         style={{ background: "linear-gradient(155deg, #5C6B2E 0%, #3A4A1A 50%, #1E1C17 100%)" }}
       >
-        {/* Parallax decorative rings */}
         <motion.div className="absolute inset-0 pointer-events-none" style={{ y: heroY }}>
           <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full border border-[#C97B3A]/15" />
           <div className="absolute -top-10 -right-10 w-[300px] h-[300px] rounded-full border border-[#C97B3A]/10" />
           <div className="absolute bottom-16  -left-28  w-[380px] h-[380px] rounded-full border border-white/5" />
         </motion.div>
 
-        {/* Staged entrance — triggered by load, not scroll */}
         <motion.p
           className="text-[#E8A85A] text-xs font-bold uppercase tracking-[0.22em] mb-5"
           initial={{ opacity: 0, y: 16 }}
@@ -488,7 +460,6 @@ export default function App() {
           Cuisine d'ici et là
         </motion.h2>
 
-        {/* Rating + badges */}
         <motion.div
           className="flex flex-wrap items-center justify-center gap-3 mb-8"
           initial={{ opacity: 0, y: 14 }}
@@ -553,7 +524,6 @@ export default function App() {
           </motion.a>
         </motion.div>
 
-        {/* Scroll cue — opacity and y are separate to avoid keyframe conflict */}
         <motion.button
           onClick={() => scrollTo("apropos")}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
@@ -572,7 +542,6 @@ export default function App() {
         </motion.button>
       </section>
 
-      {/* ── À PROPOS ── */}
       <section id="apropos" className="py-24 px-6" style={{ background: "#FAF7F0" }}>
         <div className="max-w-6xl mx-auto text-center">
           <FadeUp>
@@ -597,10 +566,8 @@ export default function App() {
             </p>
           </FadeUp>
 
-          {/* Pillars — StaggerList is NOT inside a FadeUp to avoid variant conflict */}
           <StaggerList className="grid grid-cols-1 md:grid-cols-3 gap-7 mt-14">
             {pillars.map((p) => (
-              // Wrapper div carries stagger variant; inner motion.div handles hover
               <motion.div key={p.title} variants={staggerItemVariants}>
                 <motion.div
                   className="rounded-lg p-9 text-center border h-full"
@@ -620,7 +587,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── CARTE ── */}
       <section id="carte" className="py-24 px-6" style={{ background: "#1E1C17" }}>
         <div className="max-w-3xl mx-auto">
           <FadeUp className="text-center mb-14">
@@ -635,7 +601,6 @@ export default function App() {
           </FadeUp>
 
           {menuItems.map((cat, ci) => (
-            // Each category block fades up independently
             <FadeUp key={cat.category} delay={ci * 0.1} className="mb-14">
               <div className="flex items-center gap-4 mb-7">
                 <span className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.09)" }} />
@@ -648,7 +613,6 @@ export default function App() {
                 <span className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.09)" }} />
               </div>
 
-              {/* StaggerList is a direct child of FadeUp's div — no nested variant conflict */}
               <StaggerList className="flex flex-col gap-4">
                 {cat.items.map((item) => (
                   <motion.div
@@ -692,7 +656,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── SERVICES STRIP ── */}
       <section className="py-11 px-6 overflow-hidden" style={{ background: "#5C6B2E" }}>
         <StaggerList className="max-w-5xl mx-auto flex flex-wrap justify-center gap-10">
           {["Sur place", "À emporter", "Traiteur & buffets", "Patio en saison"].map((s) => (
@@ -707,7 +670,6 @@ export default function App() {
         </StaggerList>
       </section>
 
-      {/* ── CONTACT ── */}
       <section id="contact" className="py-24 px-6" style={{ background: "#FAF7F0" }}>
         <div className="max-w-6xl mx-auto">
           <FadeUp className="text-center mb-14">
@@ -722,7 +684,6 @@ export default function App() {
           </FadeUp>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-            {/* Info card */}
             <FadeUp delay={0.1}>
               <div className="rounded-lg p-10 h-full" style={{ background: "#EDE8DB" }}>
                 <h3
@@ -751,7 +712,6 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Hours */}
                   <div className="flex gap-3 items-start">
                     <svg className="text-[#5C6B2E] mt-0.5 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
@@ -765,7 +725,6 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Rating */}
                   <div className="flex gap-3 items-start">
                     <svg className="text-[#C97B3A] mt-0.5 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -816,7 +775,6 @@ export default function App() {
               </div>
             </FadeUp>
 
-            {/* Map */}
             <FadeUp delay={0.2}>
               <div
                 className="rounded-lg overflow-hidden flex flex-col border"
@@ -845,7 +803,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
       <footer className="py-12 px-6 text-center" style={{ background: "#1E1C17" }}>
         <FadeUp>
           <div className="max-w-6xl mx-auto">
