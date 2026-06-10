@@ -175,24 +175,26 @@ const menuItems = [
   {
     category: "Entrées",
     items: [
-      { name: "Soupe du jour",    desc: "Fraîche, de saison, préparée chaque matin" },
-      { name: "Salade du jardin", desc: "Légumes locaux, vinaigrette aux herbes" },
-      { name: "Terrine maison",   desc: "Recette traditionnelle, cornichons artisanaux" },
+      { name: "Soupe du jour",         desc: "Fraîche, de saison, préparée chaque matin", popular: false },
+      { name: "Salade du jardin",      desc: "Légumes locaux, vinaigrette aux herbes",    popular: false },
+      { name: "Quiche Végétarienne",   desc: "Légumes de saison, pâte maison croustillante", popular: true },
+      { name: "Terrine maison",        desc: "Recette traditionnelle, cornichons artisanaux", popular: false },
     ],
   },
   {
     category: "Plats",
     items: [
-      { name: "Pâtes fraîches maison",  desc: "Sauce tomate du moment, basilic frais" },
-      { name: "Tajine de légumes",      desc: "Épices douces, semoule, raisins secs" },
-      { name: "Poulet rôti aux herbes", desc: "Élevé en plein air, aromates du Lauragais" },
+      { name: "Pâtes fraîches maison",  desc: "Sauce tomate du moment, basilic frais",          popular: false },
+      { name: "Tajine de légumes",      desc: "Épices douces, semoule, raisins secs",            popular: false },
+      { name: "Poulet rôti aux herbes", desc: "Élevé en plein air, aromates du Lauragais",       popular: false },
     ],
   },
   {
-    category: "Desserts",
+    category: "Desserts & Café",
     items: [
-      { name: "Tarte du jour",       desc: "Fruits de saison, pâte sablée maison" },
-      { name: "Fondant au chocolat", desc: "Cœur coulant, crème anglaise à la vanille" },
+      { name: "Café Gourmand",        desc: "Café accompagné de mignardises maison",            popular: true  },
+      { name: "Tarte du jour",        desc: "Fruits de saison, pâte sablée maison",             popular: false },
+      { name: "Fondant au chocolat",  desc: "Cœur coulant, crème anglaise à la vanille",        popular: false },
     ],
   },
 ];
@@ -268,22 +270,22 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
 
       <motion.h1
         className="font-bold text-white leading-tight text-center"
-        style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(44px,7vw,80px)" }}
+        style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(64px,10vw,110px)" }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.55 }}
       >
-        Cuisine
+        Ô4
       </motion.h1>
 
       <motion.h2
         className="italic font-normal text-[#E8A85A] leading-tight text-center"
-        style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px,5.5vw,60px)" }}
+        style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(18px,3vw,28px)" }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.7 }}
       >
-        d'ici et là
+        Cuisine d'ici et là
       </motion.h2>
 
       {/* Progress bar */}
@@ -361,7 +363,7 @@ export default function App() {
             className="text-lg font-bold tracking-wide transition-colors duration-300"
             style={{ fontFamily: "'Playfair Display', serif", color: scrolled ? "#5C6B2E" : "#fff" }}
           >
-            Cuisine d'ici et là
+            Restaurant Ô4
           </button>
 
           {/* Desktop links */}
@@ -377,7 +379,7 @@ export default function App() {
               </button>
             ))}
             <a
-              href="tel:0468786883"
+              href="tel:0684415681"
               className="bg-[#C97B3A] hover:bg-[#b5692a] text-white text-xs font-bold uppercase tracking-wider px-5 py-2 rounded transition-colors"
             >
               Réserver
@@ -389,7 +391,7 @@ export default function App() {
             className="md:hidden flex flex-col justify-center gap-1.5 p-2 w-10 h-10"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={menuOpen ? "true" : "false"}
+            aria-expanded={menuOpen}
           >
             <motion.span
               className={`block w-6 h-0.5 rounded-full ${scrolled ? "bg-[#2C2A25]" : "bg-white"}`}
@@ -432,10 +434,10 @@ export default function App() {
                 </button>
               ))}
               <a
-                href="tel:0468786883"
+                href="tel:0684415681"
                 className="bg-[#C97B3A] text-white text-sm font-bold uppercase tracking-wider px-5 py-2 rounded text-center"
               >
-                Réserver — 04 68 78 68 83
+                Réserver — 06 84 41 56 81
               </a>
             </motion.div>
           )}
@@ -463,34 +465,53 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 2.4 }}
         >
-          Restaurant · Bram, Aude
+          Restaurant · Bram, Aude · 20–30 €
         </motion.p>
 
         <motion.h1
-          className="font-bold text-white leading-tight mb-1"
-          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(52px, 8vw, 92px)" }}
+          className="font-bold text-white leading-tight mb-2"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(72px, 12vw, 130px)" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.55, ease: [0.22, 1, 0.36, 1] }}
         >
-          Cuisine
+          Ô4
         </motion.h1>
 
         <motion.h2
-          className="font-normal italic text-[#E8A85A] leading-tight mb-8"
-          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(38px, 6vw, 72px)" }}
+          className="font-normal italic text-[#E8A85A] leading-tight mb-5"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(22px, 3.5vw, 38px)" }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.68, ease: [0.22, 1, 0.36, 1] }}
         >
-          d'ici et là
+          Cuisine d'ici et là
         </motion.h2>
 
+        {/* Rating + badges */}
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-3 mb-8"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 2.78 }}
+        >
+          <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-bold px-4 py-1.5 rounded-full">
+            <span className="text-[#E8A85A]">★</span> 4,6
+            <span className="font-normal text-white/60 text-xs">(469 avis)</span>
+          </span>
+          <span className="bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 text-xs font-semibold px-4 py-1.5 rounded-full">
+            🏳️‍🌈 LGBTQ+ friendly
+          </span>
+          <span className="bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 text-xs font-semibold px-4 py-1.5 rounded-full">
+            Sur place · À emporter
+          </span>
+        </motion.div>
+
         <motion.p
-          className="text-white/65 text-lg leading-relaxed max-w-lg mx-auto mb-11 font-light tracking-wide"
+          className="text-white/65 text-lg leading-relaxed max-w-lg mx-auto mb-10 font-light tracking-wide"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 2.82 }}
+          transition={{ duration: 0.7, delay: 2.92 }}
         >
           Cuisine raffinée, produits frais et saveurs qui voyagent — sur place ou à emporter, au cœur du Lauragais.
         </motion.p>
@@ -499,7 +520,7 @@ export default function App() {
           className="flex flex-wrap gap-3 justify-center"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 3.0 }}
+          transition={{ duration: 0.6, delay: 3.08 }}
         >
           <motion.button
             onClick={() => scrollTo("carte")}
@@ -636,8 +657,15 @@ export default function App() {
                     className="flex items-start gap-6 pb-4 border-b"
                     style={{ borderColor: "rgba(255,255,255,0.07)", borderStyle: "dashed" }}
                   >
-                    <div>
-                      <p className="text-white font-bold text-base mb-1">{item.name}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="text-white font-bold text-base">{item.name}</p>
+                        {item.popular && (
+                          <span className="text-[10px] font-bold uppercase tracking-wider bg-[#C97B3A]/25 text-[#E8A85A] border border-[#C97B3A]/40 px-2 py-0.5 rounded-full">
+                            ★ Populaire
+                          </span>
+                        )}
+                      </div>
                       <p className="text-white/40 text-sm italic font-light">{item.desc}</p>
                     </div>
                   </motion.div>
@@ -717,9 +745,44 @@ export default function App() {
                     <span className="text-[#5C6B2E] mt-0.5 shrink-0"><PhoneIcon /></span>
                     <div>
                       <p className="font-bold text-[#2C2A25] text-sm mb-1">Téléphone</p>
-                      <a href="tel:0468786883" className="text-[#C97B3A] font-bold text-sm hover:underline">
-                        04 68 78 68 83
+                      <a href="tel:0684415681" className="text-[#C97B3A] font-bold text-sm hover:underline">
+                        06 84 41 56 81
                       </a>
+                    </div>
+                  </div>
+
+                  {/* Hours */}
+                  <div className="flex gap-3 items-start">
+                    <svg className="text-[#5C6B2E] mt-0.5 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <div>
+                      <p className="font-bold text-[#2C2A25] text-sm mb-1">Horaires</p>
+                      <div className="text-[#6B6660] text-sm leading-relaxed space-y-0.5">
+                        <p><span className="font-semibold text-[#2C2A25]">Lun – Ven</span> · 12:00 – 13:30</p>
+                        <p className="text-[#C97B3A] text-xs font-semibold">Fermé le week-end</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Rating */}
+                  <div className="flex gap-3 items-start">
+                    <svg className="text-[#C97B3A] mt-0.5 shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <div>
+                      <p className="font-bold text-[#2C2A25] text-sm mb-1">Note Google</p>
+                      <div className="flex items-center gap-2">
+                        <div className="flex gap-0.5">
+                          {[1,2,3,4,5].map((s) => (
+                            <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill={s <= 4 ? "#C97B3A" : "none"} stroke="#C97B3A" strokeWidth="1.5" aria-hidden="true">
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                          ))}
+                        </div>
+                        <span className="font-bold text-[#2C2A25] text-sm">4,6</span>
+                        <span className="text-[#6B6660] text-xs">· 469 avis</span>
+                      </div>
                     </div>
                   </div>
                   <hr className="border-[#5C6B2E]/15" />
@@ -787,8 +850,9 @@ export default function App() {
         <FadeUp>
           <div className="max-w-6xl mx-auto">
             <p className="text-white text-2xl italic mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Cuisine d'ici et là
+              Restaurant Ô4
             </p>
+            <p className="text-[#E8A85A]/70 text-sm font-light italic mb-1">Cuisine d'ici et là</p>
             <p className="text-white/45 text-sm mb-6">
               2 impasse de la Malepère · ZAE du Lauragais · 11150 Bram
             </p>
@@ -814,7 +878,7 @@ export default function App() {
               {[
                 { href: "https://www.facebook.com/cuisinedicietla",  label: "Facebook"  },
                 { href: "https://www.instagram.com/cuisinedicietla/", label: "Instagram" },
-                { href: "tel:0468786883",                             label: "04 68 78 68 83" },
+                { href: "tel:0684415681",                             label: "06 84 41 56 81" },
               ].map(({ href, label }) => (
                 <a
                   key={label}
@@ -828,8 +892,13 @@ export default function App() {
               ))}
             </div>
             <p className="text-white/20 text-xs">
-              © {currentYear} Cuisine d'ici et là · Tous droits réservés
+              © {currentYear} Restaurant Ô4 — Cuisine d'ici et là · Tous droits réservés
             </p>
+            <div className="flex flex-wrap justify-center gap-6 mb-6 text-sm">
+              <p className="text-white/20 text-xs">
+                Développeur du site : <a href="https://wailly-mylowann.fr" target="_blank" rel="noopener noreferrer" className="text-white/45 hover:text-white/75 transition-colors">Wyloz</a>
+              </p>
+            </div>
           </div>
         </FadeUp>
       </footer>
